@@ -7,3 +7,5 @@ This repository is the base element for the development of Practice 1 for the ex
  This class is abstract so the different trains can inherit from this one.
 ## Second commit- `PassengerTrain` class done
 This class inherits from the Tain abstract class and adds the attributes numberOfCArriages and capacity
+## Third commit- `FreightTrain` class done
+This class inherits from the Tain abstract class and adds the attributes MaxWeight and FreightType
