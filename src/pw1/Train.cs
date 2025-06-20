@@ -7,7 +7,7 @@ namespace RailUFV
         protected string id;
         public enum TrainStatus
         {
-            EnRoute, Wainting, Docking, Docked
+            EnRoute, Waiting, Docking, Docked
         }
         protected TrainStatus status;
         protected int arrivalTime;

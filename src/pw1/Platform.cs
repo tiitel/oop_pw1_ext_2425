@@ -17,7 +17,7 @@ namespace RailUFV
             this.id = id;
             this.status = PlatformStatus.Free;
             this.currentTrain = null;
-            this.dockingTime = 2;
+            this.dockingTime = 0;
         }
 
         public string GetId()
@@ -40,16 +40,39 @@ namespace RailUFV
             return dockingTime;
         }
 
+        public bool IsFree() 
+        {
+            return this.status == PlatformStatus.Free;
+        }
+
         public bool RequestPlatform(Train train)
         {
             if (this.status == PlatformStatus.Free)
             {
                 this.currentTrain = train;
                 this.status = PlatformStatus.Occupied;
+                this.dockingTime = 2;
                 return true;
 
             }
             return false;
+        }
+        public void AdvanceTick()
+        {
+            if(this.status == PlatformStatus.Occupied && dockingTime > 0)
+            {
+                this.dockingTime --;
+                if(this.dockingTime == 0)
+                {
+                    ReleaseRunway();
+                }
+            }
+        }
+        public void ReleaseRunway()
+        {
+            this.currentTrain = null;
+            this.status = PlatformStatus.Free;
+            this.dockingTime  = 0;
         }
     
     }    
