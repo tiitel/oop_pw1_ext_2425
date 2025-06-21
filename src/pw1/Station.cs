@@ -131,6 +131,17 @@ namespace RailUFV
                 }
             }
         }
+        public bool AllTrainsDocked() //method made to know if every train is docked so the simulation can end.
+        {
+            foreach (Train train in trains)
+            {
+                if (train.GetStatus() != Train.TrainStatus.Docked)
+                {
+                     return false; 
+                }
+            }
+            return true; 
+        }
         public void LoadTrainsFromFile(string filename)
         {
             if (!File.Exists(filename))
@@ -151,7 +162,7 @@ namespace RailUFV
                     int arrivalTime = int.Parse(parts[1]);
                     string type = parts[2].ToLower();
 
-                    Train.TrainStatus status = Train.TrainStatus.EnRoute; 
+                    Train.TrainStatus status = Train.TrainStatus.EnRoute;
 
                     if (type == "passenger")
                     {

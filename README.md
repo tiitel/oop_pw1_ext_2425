@@ -19,4 +19,9 @@ This repository is the base element for the development of Practice 1 for the ex
  Tried to create another advancetick on the train class, only for code clarity, but it used foreach loops refered to the list runways that is a private attribute of the class station
  The only thing left id creating the methos to add trains from a csv file.
  ## Sixth commit- Developed LoadTrainsfromfile method.
- Finished the class Station with this 
+ Finished the class Station with this.
+ ## Seventh commit- `Program ` class done.
+ Finished the main program.
+ For this to work i had to create a method called AllTrainsDocked in the class station since thats the way the simulation can end.
+ 
+
