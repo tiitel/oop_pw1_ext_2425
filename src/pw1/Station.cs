@@ -125,12 +125,62 @@ namespace RailUFV
 
                     if (!stillLanding)
                     {
-                        train.SetStatus(Train.TrainStatus.Docked); 
+                        train.SetStatus(Train.TrainStatus.Docked);
                         Console.WriteLine($"Train {train.GetId()} has landed successfully");
                     }
                 }
             }
         }
-        
+        public void LoadTrainsFromFile(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                Console.WriteLine("File not found.");
+                return;
+            }
+
+            string[] lines = File.ReadAllLines(filename);
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                try
+                {
+                    string id = parts[0];
+                    int arrivalTime = int.Parse(parts[1]);
+                    string type = parts[2].ToLower();
+
+                    Train.TrainStatus status = Train.TrainStatus.EnRoute; 
+
+                    if (type == "passenger")
+                    {
+                        int numberOfCarriages = int.Parse(parts[3]);
+                        int capacity = int.Parse(parts[4]);
+
+                        PassengerTrain pt = new PassengerTrain(id, status, arrivalTime, "Passenger", numberOfCarriages, capacity);
+                        trains.Add(pt);
+                    }
+                    else if (type == "freight")
+                    {
+                        int maxWeight = int.Parse(parts[3]);
+                        string freightType = parts[4];
+
+                        FreightTrain ft = new FreightTrain(id, status, arrivalTime, "Freight", maxWeight, freightType);
+                        trains.Add(ft);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Unknown train type: {type}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error processing line: {line}");
+                    Console.WriteLine($"Details: {e.Message}");
+                }
+            }
+
+        }
     }
 }

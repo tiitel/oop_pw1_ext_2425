@@ -18,3 +18,5 @@ This repository is the base element for the development of Practice 1 for the ex
  For the Advance tick method i had to create some methods on the platform class to make this work, like request runway or the advance tick
  Tried to create another advancetick on the train class, only for code clarity, but it used foreach loops refered to the list runways that is a private attribute of the class station
  The only thing left id creating the methos to add trains from a csv file.
+ ## Sixth commit- Developed LoadTrainsfromfile method.
+ Finished the class Station with this 
