@@ -21,7 +21,7 @@ namespace RailUFV
                 switch (option)
                 {
                     case "1":
-                        Console.Write("Enter the CSV filename (e.g. trains.csv): ");
+                        Console.Write("Enter the CSV filepath (e.g. trains.csv): ");
                         string filename = Console.ReadLine();
                         station.LoadTrainsFromFile(filename);
                         break;

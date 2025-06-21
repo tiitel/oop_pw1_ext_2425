@@ -47,7 +47,7 @@ namespace RailUFV
             Console.WriteLine("|----------------------------|");
             foreach (Train train in trains)
             {
-                Console.WriteLine($"{train.GetId()} | {train.GetStatus()} | Type: {train.GetType()}");
+                Console.WriteLine($"{train.GetId()} | {train.GetStatus()} | Type: {train.GetType()}| Arrival Time: {train.GetArrivalTime()}");
             }
         }
         public void AdvanceTick()
@@ -126,7 +126,7 @@ namespace RailUFV
                     if (!stillLanding)
                     {
                         train.SetStatus(Train.TrainStatus.Docked);
-                        Console.WriteLine($"Train {train.GetId()} has landed successfully");
+                        Console.WriteLine($"Train {train.GetId()} has docked successfully");
                     }
                 }
             }
