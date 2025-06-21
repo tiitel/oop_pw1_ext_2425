@@ -65,31 +65,27 @@ namespace RailUFV
                 if (train.GetStatus() == Train.TrainStatus.EnRoute) //This is for EnRoute state where we only reduce arrival time
                 {
                     int newArrivalTime = train.GetArrivalTime() - 15;
-                    if (newArrivalTime < 0)
+                    train.SetArrivalTime(newArrivalTime);
+                    bool flag = false;
+                    foreach (Platform platform in platforms) //this serves if the train has arrived it doesn have to go trough Waiting if there are free platforms it will go directly to docking
                     {
-                        newArrivalTime = 0;
-                    }
-                    else
-                    {
-                        train.SetArrivalTime(newArrivalTime);
-                        bool flag = false;
-                        foreach (Platform platform in platforms) //this serves if the train has arrived it doesn have to go trough Waiting if there are free platforms it will go directly to docking
+                        if (newArrivalTime <= 0 && platform.IsFree())
                         {
-                            if (newArrivalTime == 0 && platform.IsFree())
+                            bool success = platform.RequestPlatform(train);
+                            if (success)
                             {
-                                bool success = platform.RequestPlatform(train);
-                                if (success)
-                                {
-                                    train.SetStatus(Train.TrainStatus.Docking);
-                                    flag = true;
-                                }
-                            }
-                        }
-                        if (newArrivalTime == 0 && !flag)
-                        {
-                            train.SetStatus(Train.TrainStatus.Waiting);
+                                train.SetStatus(Train.TrainStatus.Docking);
+                                flag = true;
+                                break;
+                            } 
+                            
                         }
                     }
+                    if (newArrivalTime <= 0 && !flag)
+                    {
+                        train.SetStatus(Train.TrainStatus.Waiting);
+                    }
+
                 }
                 else if (train.GetStatus() == Train.TrainStatus.Waiting) //When train is waiting for free platforms 
                 {
